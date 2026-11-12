@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>這個站怎麼做的｜生成式AI 課後筆記</title>
+  <meta name="description" content="這個筆記站是照 AGENTS.md 的規則做出來的，這頁說明規則的內容和它是怎麼來的。">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到內容</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="index.html">課後筆記<small>GENAI · 2026 秋</small></a>
+    <nav class="site-nav" aria-label="主選單">
+      <a href="index.html">筆記目錄</a>
+      <a href="glossary.html">名詞索引</a>
+      <a href="about.html" aria-current="page">這個站怎麼做的</a>
+      <button class="theme-toggle" type="button">深色</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">ABOUT</p>
+      <h1>這個站怎麼做的</h1>
+      <p>這是生成式AI 第 09 週「換你當老闆」的作業。作業要我們寫一份 AGENTS.md 或 CLAUDE.md，讓 AI 讀完就知道這個專案要怎麼繼續做。我選了自己每週都會用到的東西，也就是課後筆記。</p>
+    </header>
+
+    <div class="prose">
+      <h2>跟 Vibe Coding 差在哪</h2>
+      <p>第 08 週講的 Vibe Coding 是把一個網頁做出來就好。這次的重點是一套規則，之後每上一週課，都能照同一個方式很快做出一頁新的筆記。所以這個專案最重要的檔案是 AGENTS.md、筆記範本和檢查腳本，網頁是照著它們做出來的結果。</p>
+      <p>我現在要新增一週，只需要做兩件事。把講義和自己寫的 <code>my-notes.md</code> 放進 <code>sources/week-NN/</code>，然後跟 AI 說「幫我做第 NN 週的筆記」。</p>
+
+      <h2>老闆要講清楚的三件事</h2>
+      <p>老師在第 09 週說，好的交辦要講清楚三件事，不要讓 AI 猜。AGENTS.md 就是照這三件事寫的。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">老師說的</th><th scope="col">寫在哪裡</th><th scope="col">例子</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">要什麼成品</th><td>AGENTS.md 第 3、4 節，加上筆記範本</td><td>一頁 week-NN.html、首頁多一列、名詞索引加條目，最後交一份固定格式的回報</td></tr>
+            <tr><th scope="row">有什麼限制</th><td>AGENTS.md 第 2、3、7、8 節</td><td>「我的理解」只能改寫我自己的 my-notes.md，不能改 site.css，不用破折號和分號</td></tr>
+            <tr><th scope="row">怎麼算做完</th><td>AGENTS.md 第 9 節，加上 check.mjs</td><td>檢查腳本沒有 error 才算做完，內容對不對再由我自己讀</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>老師整理桌面的例子裡有一條「看不出用途的放進待確認」，我很喜歡，所以 AGENTS.md 第 10 節也寫了不確定的時候要怎麼做。講義看不懂就跳過並寫出頁碼，不要猜。</p>
+
+      <h2>新增一週的流程</h2>
+      <ol class="flow" aria-label="新增一週筆記的流程">
+        <li>確認 sources 裡有講義和 my-notes.md</li>
+        <li>讀講義、我的筆記和第 06 週的標準範例</li>
+        <li>複製範本，填好九個區塊</li>
+        <li>名詞加進索引，首頁加一列</li>
+        <li>跑 check.mjs 改到沒有 error</li>
+        <li>照固定格式回報</li>
+      </ol>
+
+      <h2>資料夾</h2>
+<pre class="tree">genai-notes/
+├── AGENTS.md              <span class="c">規則，所有 AI 都讀這份</span>
+├── CLAUDE.md              <span class="c">只有一行，叫 Claude 去讀 AGENTS.md</span>
+├── index.html             <span class="c">首頁</span>
+├── glossary.html          <span class="c">名詞索引</span>
+├── about.html             <span class="c">這一頁</span>
+├── notes/week-NN.html     <span class="c">每週一頁</span>
+├── templates/             <span class="c">筆記範本</span>
+├── assets/                <span class="c">唯一的 CSS 和 JS</span>
+├── sources/week-NN/       <span class="c">講義（不上傳）和 my-notes.md</span>
+├── docs/                  <span class="c">跟 AI 討論規則的紀錄</span>
+└── scripts/               <span class="c">check.mjs、extract_slides.py</span></pre>
+
+      <h2>規則是怎麼來的</h2>
+      <p>老師說這種規格書會由我們和 AI 討論出來，所以我先跟 AI 討論了兩輪。第一輪問 AGENTS.md 要寫什麼、檔名怎麼取、每頁要有哪些區塊。第二輪問名詞索引怎麼維持一致、哪些規則可以交給腳本檢查、怎麼讓筆記讀起來不像 AI 寫的。</p>
+      <p>大部分建議我都採用了，例如檔名只放週次、「我的理解」只能來自 my-notes.md、名詞定義寫進去就不改。有兩個地方我沒照它的。它建議完全不用 JS 和外部資源，但我想要深色模式和比較好看的中文標題字，所以改成只允許一支 site.js 和 Google Fonts。它建議禁用詞只當 warning，我把破折號和分號改成 error，因為這是我自己寫東西的習慣。</p>
+      <p>完整的討論紀錄在 <a href="https://github.com/OWNER/genai-notes/blob/main/docs/ai-discussion.md">docs/ai-discussion.md</a>。</p>
+
+      <h2 id="test">用新的對話測試規則</h2>
+      <p>規則寫完，我自己讀都覺得很清楚，但這不代表 AI 讀得懂。所以第 06、07 週我自己做，當標準範例。第 08、09 週各開一個全新的對話，什麼背景都不給，只說老師講義上那句話：</p>
+<pre><code>請先讀 AGENTS.md，瞭解這個專案的內容。然後幫我做第 NN 週的筆記。</code></pre>
+      <p>兩次都照流程做完，check.mjs 通過，回報也照第 9 節的格式寫。講義抽出來看不清楚的頁碼，它都列在「需要你確認」，沒有自己猜。不過也抓到 7 個規則沒寫清楚的地方：</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">測試</th><th scope="col">AI 卡住的地方</th><th scope="col">我怎麼改規則</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">第 08 週</th><td>AGENTS.md 說公式、流程、比較表「加一個」，範本註解卻寫「各一個」</td><td>新增「核心概念的補充」，每種最多一個，h3 小節最多 2 個</td></tr>
+            <tr><th scope="row">第 08 週</th><td>講義放進資料夾後改名成 slides.pdf，它只能從前幾週猜原始檔名和作業名稱</td><td>my-notes.md 開頭固定寫主題、講義、作業三行</td></tr>
+            <tr><th scope="row">第 08 週</th><td>PDF 抽出來的字是康熙部首字，例如「⽅」，它要一個一個換</td><td>extract_slides.py 自動換回一般的字</td></tr>
+            <tr><th scope="row">第 08 週</th><td>不確定連到舊名詞算不算名額，名額不夠時不知道留哪些</td><td>寫清楚舊名詞不算名額，優先收概念的標題</td></tr>
+            <tr><th scope="row">第 09 週</th><td>規則叫它用 <code>.more</code> 寫名詞補充，但 site.css 沒有這個 class</td><td>site.css 加上 .more，名詞索引放兩則範例</td></tr>
+            <tr><th scope="row">第 09 週</th><td>第 7 節「範例沒用過的 class 不要用」跟第 4 節允許比較表衝突</td><td>改成「只能用 site.css 裡已經有的 class」</td></tr>
+            <tr><th scope="row">第 09 週</th><td>MCP 在兩週都出現，不知道首次出現算哪一週</td><td>我決定算第 08 週，譯名表也補了三個詞</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>第一次測試抓到的問題，第二次測試就沒再出現。這些修改都記在 AGENTS.md 最後的「規則修改紀錄」，之後再遇到 AI 卡住，也是照這個方式補規則。</p>
+
+      <h2>原始碼</h2>
+      <ul>
+        <li><a href="https://github.com/OWNER/genai-notes">GitHub repository</a></li>
+        <li><a href="https://github.com/OWNER/genai-notes/blob/main/AGENTS.md">AGENTS.md</a></li>
+        <li><a href="https://github.com/OWNER/genai-notes/blob/main/scripts/check.mjs">scripts/check.mjs</a></li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>生成式AI 課後筆記 · 照 AGENTS.md 的規則製作</span>
+    <a href="about.html">這個站怎麼做的</a>
+  </div>
+</footer>
+</body>
+</html>

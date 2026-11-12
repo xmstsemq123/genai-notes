@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 標題格式固定：第 NN 週 主題｜生成式AI 課後筆記 -->
+  <title>第 {{NN}} 週 {{主題}}｜生成式AI 課後筆記</title>
+  <meta name="description" content="{{一句話重點，跟 #summary 一樣}}">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script src="../assets/js/site.js"></script>
+</head>
+<!-- data-week 跟檔名的 NN 一樣，data-accent 照 AGENTS.md 的主色表 -->
+<body data-week="{{NN}}" data-accent="{{主色}}">
+<a class="skip-link" href="#main">跳到內容</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html">課後筆記<small>GENAI · 2026 秋</small></a>
+    <nav class="site-nav" aria-label="主選單">
+      <a href="../index.html">筆記目錄</a>
+      <a href="../glossary.html">名詞索引</a>
+      <a href="../about.html">這個站怎麼做的</a>
+      <button class="theme-toggle" type="button">深色</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <header class="note-head">
+      <p class="eyebrow">第 {{NN}} 週</p>
+      <h1>{{講義標題，照講義第一頁寫}}</h1>
+      <dl class="note-meta">
+        <div><dt>講義</dt><dd>{{my-notes.md 開頭的「講義」}}</dd></div>
+        <div><dt>頁數</dt><dd>{{總頁數}} 頁</dd></div>
+        <div><dt>作業</dt><dd>{{my-notes.md 開頭的「作業」}}</dd></div>
+      </dl>
+    </header>
+
+    <div class="note-layout">
+      <nav class="toc" aria-label="本頁目錄">
+        <p>本頁目錄</p>
+        <ol>
+          <li><a href="#summary">一句話重點</a></li>
+          <li><a href="#why">這週在解決什麼</a></li>
+          <li><a href="#concepts">核心概念</a></li>
+          <li><a href="#links">跟前幾週的關係</a></li>
+          <li><a href="#mine">我的理解</a></li>
+          <li><a href="#homework">這週的作業</a></li>
+          <li><a href="#questions">還沒搞懂的</a></li>
+          <li><a href="#terms">本週名詞</a></li>
+          <li><a href="#sources">出處</a></li>
+        </ol>
+      </nav>
+
+      <article class="note-body">
+        <section id="summary">
+          <h2><span class="no">01</span>一句話重點</h2>
+          <!-- 50 字以內，一句話講完這週在講什麼 -->
+          <p class="oneliner">{{一句話重點}}</p>
+        </section>
+
+        <section id="why">
+          <h2><span class="no">02</span>這週在解決什麼</h2>
+          <!-- 1 到 2 段。沒有這週學的東西之前會遇到什麼麻煩 -->
+          <p>{{問題}}</p>
+        </section>
+
+        <section id="concepts">
+          <h2><span class="no">03</span>核心概念</h2>
+          <!-- 3 到 5 個 .concept。每個：白話解釋 + 一個具體例子。例子優先用講義上的 -->
+          <dl class="concepts">
+            <div class="concept">
+              <dt>{{概念名稱}}</dt>
+              <dd>
+                <p>{{白話解釋}}</p>
+                <p>例子：{{具體例子}}</p>
+              </dd>
+            </div>
+          </dl>
+          <!-- 選用，規定見 AGENTS.md 第 4 節「核心概念的補充」：.formula、ol.flow、.table-wrap > table 各最多一個，h3 補充小節最多 2 個 -->
+        </section>
+
+        <section id="links">
+          <h2><span class="no">04</span>跟前幾週的關係</h2>
+          <!-- 至少連到一篇前面的筆記，用 ../notes/week-NN.html 的相對路徑寫 week-NN.html 即可 -->
+          <p>{{這週補上了前面哪一週的什麼缺口}}</p>
+        </section>
+
+        <section id="mine">
+          <h2><span class="no">05</span>我的理解</h2>
+          <!-- 只能改寫 sources/week-NN/my-notes.md 的「上課時的想法」。沒有 my-notes.md 就留下面這行 TODO，不准自己寫 -->
+          <div class="mine">
+            <p>TODO：等我補 my-notes.md</p>
+          </div>
+        </section>
+
+        <section id="homework">
+          <h2><span class="no">06</span>這週的作業</h2>
+          <!-- 只能改寫 my-notes.md 的「作業做了什麼」。數字照抄，不能四捨五入或改寫 -->
+          <div class="homework">
+            <span class="hw-label">HW{{NN}}</span>
+            <div>
+              <h3>{{作業名稱}}</h3>
+              <p>{{做了什麼、遇到什麼問題、怎麼改}}</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="questions">
+          <h2><span class="no">07</span>還沒搞懂的</h2>
+          <!-- 只能來自 my-notes.md 的「還不懂的」。不准幫我回答 -->
+          <ol class="questions">
+            <li>{{問題}}</li>
+          </ol>
+        </section>
+
+        <section id="terms">
+          <h2><span class="no">08</span>本週名詞</h2>
+          <!-- 每個名詞都要在 glossary.html 有同 id 的條目。已存在的名詞直接連，不要重新定義 -->
+          <ul class="term-list">
+            <li><a class="tag" href="../glossary.html#{{term-id}}">{{名詞}}</a></li>
+          </ul>
+        </section>
+
+        <section id="sources">
+          <h2><span class="no">09</span>出處</h2>
+          <!-- 講義名稱 + 頁碼。外部連結只放講義上出現過的網址 -->
+          <ul>
+            <li>{{講義名稱}} p.{{頁碼}}</li>
+          </ul>
+        </section>
+
+        <!-- 上一週 / 下一週。沒有就省略那一邊的 <a> -->
+        <nav class="pager" aria-label="前後週">
+          <a class="prev" href="week-{{上一週}}.html"><small>上一週</small><span>{{上一週主題}}</span></a>
+          <a class="next" href="week-{{下一週}}.html"><small>下一週</small><span>{{下一週主題}}</span></a>
+        </nav>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>生成式AI 課後筆記 · 照 AGENTS.md 的規則製作</span>
+    <a href="../about.html">這個站怎麼做的</a>
+  </div>
+</footer>
+</body>
+</html>

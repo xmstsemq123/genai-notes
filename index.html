@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>生成式AI 課後筆記</title>
+  <meta name="description" content="每上完一週生成式AI，把講義和自己的想法整理成一頁筆記。">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到內容</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="index.html">課後筆記<small>GENAI · 2026 秋</small></a>
+    <nav class="site-nav" aria-label="主選單">
+      <a href="index.html" aria-current="page">筆記目錄</a>
+      <a href="glossary.html">名詞索引</a>
+      <a href="about.html">這個站怎麼做的</a>
+      <button class="theme-toggle" type="button">深色</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <header class="home-hero">
+      <p class="eyebrow reveal">碩一上學期 · 生成式AI</p>
+      <h1 class="reveal reveal-2">生成式AI<br>課後筆記</h1>
+      <p class="lede reveal reveal-3">每上完一週課，我把講義和自己的想法整理成一頁。寫給一個月後忘記上課內容的自己，也順便給一起修課的同學看。</p>
+      <div class="home-stats reveal reveal-3">
+        <span><b data-stat="weeks">4</b>週筆記</span>
+        <span><b data-stat="terms">22</b>個名詞</span>
+      </div>
+    </header>
+
+    <section aria-labelledby="weeks-title">
+      <div class="section-label">
+        <h2 id="weeks-title">每週筆記</h2>
+        <span>由舊到新</span>
+      </div>
+      <ol class="week-list">
+        <li class="week-row" data-accent="teal">
+          <a href="notes/week-06.html">
+            <span class="week-num">06</span>
+            <div>
+              <h3>打造自己的對話機器人</h3>
+              <p>模型可以跑在自己電腦上，用時要自己讀過、自己負責，再用 system prompt 做出有人設的機器人。</p>
+            </div>
+            <div class="week-tags"><span class="tag">量化</span><span class="tag">幻覺</span><span class="tag">System Prompt</span></div>
+          </a>
+        </li>
+        <li class="week-row" data-accent="sienna">
+          <a href="notes/week-07.html">
+            <span class="week-num">07</span>
+            <div>
+              <h3>讓 AI 看懂你的世界</h3>
+              <p>RAG 是先幫模型找好相關資料再一起放進 prompt，LLM Wiki 是先讓 AI 把資料整理成 wiki。</p>
+            </div>
+            <div class="week-tags"><span class="tag">RAG</span><span class="tag">Embedding</span><span class="tag">LLM Wiki</span></div>
+          </a>
+        </li>
+        <li class="week-row" data-accent="olive">
+          <a href="notes/week-08.html">
+            <span class="week-num">08</span>
+            <div>
+              <h3>教 AI 做事的方法</h3>
+              <p>AI Agent 是教 AI 用我們做事的方法做事，吳恩達整理出四個設計模式。</p>
+            </div>
+            <div class="week-tags"><span class="tag">AI Agent</span><span class="tag">Reflection</span><span class="tag">Tool Use</span></div>
+          </a>
+        </li>
+        <li class="week-row" data-accent="plum">
+          <a href="notes/week-09.html">
+            <span class="week-num">09</span>
+            <div>
+              <h3>換你當老闆</h3>
+              <p>從問 AI 到交辦給 AI，靠 harness 讓它動手，再用 AGENTS.md 講清楚成品、限制和驗收。</p>
+            </div>
+            <div class="week-tags"><span class="tag">代理式 AI</span><span class="tag">Harness</span><span class="tag">AGENTS.md</span></div>
+          </a>
+        </li>
+      </ol>
+    </section>
+
+    <section class="home-how" aria-label="新的一週怎麼加">
+      <div>
+        <span class="step">STEP 01</span>
+        <h3>把材料放進資料夾</h3>
+        <p>講義 PDF 和我自己寫的 my-notes.md 放進 <code>sources/week-NN/</code>。</p>
+      </div>
+      <div>
+        <span class="step">STEP 02</span>
+        <h3>交辦一句話</h3>
+        <p>跟 AI 說「幫我做第 NN 週的筆記」，它照 AGENTS.md 的步驟做。</p>
+      </div>
+      <div>
+        <span class="step">STEP 03</span>
+        <h3>跑檢查才算做完</h3>
+        <p><code>node scripts/check.mjs</code> 沒有 error，再由我讀過內容。<a href="about.html">完整規則</a></p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>生成式AI 課後筆記 · 照 AGENTS.md 的規則製作</span>
+    <a href="about.html">這個站怎麼做的</a>
+  </div>
+</footer>
+</body>
+</html>

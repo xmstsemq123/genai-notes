@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>名詞索引｜生成式AI 課後筆記</title>
+  <meta name="description" content="每週筆記出現的名詞集中在這裡，一個名詞一個條目，附第一次出現的週次。">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到內容</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="index.html">課後筆記<small>GENAI · 2026 秋</small></a>
+    <nav class="site-nav" aria-label="主選單">
+      <a href="index.html">筆記目錄</a>
+      <a href="glossary.html" aria-current="page">名詞索引</a>
+      <a href="about.html">這個站怎麼做的</a>
+      <button class="theme-toggle" type="button">深色</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">GLOSSARY</p>
+      <h1>名詞索引</h1>
+      <p>每週筆記的「核心概念」裡出現的名詞都收在這裡。一個名詞只有一個條目，定義寫進去就不改，之後有新的理解會在下面補一行。照英文 id 排序，右邊是第一次出現的週次。</p>
+    </header>
+
+    <dl class="glossary">
+      <div class="glossary-item" id="term-agentic-ai">
+        <dt>代理式 AI<small>Agentic AI</small></dt>
+        <dd>
+          <p>把一件工作交辦給 AI，由它多步驟自己做完，交回一份成品。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-09.html#concepts">第 09 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-agents-md">
+        <dt>AGENTS.md<small>員工手冊</small></dt>
+        <dd>
+          <p>放在專案資料夾的通用規則檔，AI 每次上工前先讀。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-09.html#concepts">第 09 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-ai-agent">
+        <dt>AI Agent<small>AI 代理人</small></dt>
+        <dd>
+          <p>教 AI 用我們做事的方法做事。講義的公式是 AI Model 加上 Harness。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-08.html#concepts">第 08 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-aisuite">
+        <dt>AISuite<small>Python 套件</small></dt>
+        <dd>
+          <p>吳恩達的套件，用同一種寫法呼叫不同供應商的模型。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-06.html#concepts">第 06 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-chunk">
+        <dt>文字塊<small>chunk</small></dt>
+        <dd>
+          <p>把文件切成一段一段，每段各自做 embedding 拿來檢索。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-07.html#concepts">第 07 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-claude-md">
+        <dt>CLAUDE.md<small>Claude 專用的員工手冊</small></dt>
+        <dd>
+          <p>Claude 專用的規則檔，作用跟 AGENTS.md 一樣，每次上工前先讀。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-09.html#concepts">第 09 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-embedding">
+        <dt>Embedding<small>特徵代表向量</small></dt>
+        <dd>
+          <p>把一段文字變成向量，意思接近的文字向量也會接近。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-07.html#concepts">第 07 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-hallucination">
+        <dt>幻覺<small>hallucination</small></dt>
+        <dd>
+          <p>模型生成跟事實不符的內容。Karpathy 認為這是 LLM 本來的特性。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-06.html#concepts">第 06 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-harness">
+        <dt>Harness<small>工作裝備</small></dt>
+        <dd>
+          <p>模型以外的部分，把模型說要做的事真的執行，再把結果回報給模型。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-09.html#concepts">第 09 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-llm-wiki">
+        <dt>LLM Wiki<small>Karpathy 的個人知識庫做法</small></dt>
+        <dd>
+          <p>讓 LLM 把原始資料整理成 Markdown wiki，之後讀 wiki 回答問題。</p>
+          <p class="more">第 09 週補充：老師在講專案資料夾時又提了一次。raw 放自己找的資料，wiki 放 AI 整理好的檔案，index.md 當目錄。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-07.html#concepts">第 07 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-mcp">
+        <dt>MCP<small>Model Context Protocol</small></dt>
+        <dd>
+          <p>Anthropic 提出的標準，讓 LLM 用同一種方式連接外部工具和資料。</p>
+          <p class="more">第 09 週補充：完整的 harness 裡，MCP 是「連接器」，用來接上 Gmail、行事曆、雲端硬碟。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-08.html#concepts">第 08 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-moe">
+        <dt>MoE<small>Mixture of Experts</small></dt>
+        <dd>
+          <p>一種模型架構。講義提到同樣大小的模型，MoE 生成得比較快。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-06.html#concepts">第 06 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-multiagent-collaboration">
+        <dt>Multiagent Collaboration<small>多代理合作</small></dt>
+        <dd>
+          <p>多個 AI Agent 一起工作，常由一個像 PM 的 LLM 拆解任務、分配工作。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-08.html#concepts">第 08 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-planning">
+        <dt>Planning<small>AI Agent 設計模式</small></dt>
+        <dd>
+          <p>先請 LLM「想一想」「打草稿」，規劃好怎麼做再正式回應。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-08.html#concepts">第 08 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-quantization">
+        <dt>量化<small>quantization</small></dt>
+        <dd>
+          <p>用比較少的位元存模型參數。4-bit 時每 10 億參數約佔 0.5 GB。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-06.html#concepts">第 06 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-rag">
+        <dt>RAG<small>檢索增強生成 · Retrieval-Augmented Generation</small></dt>
+        <dd>
+          <p>先從外部資料找出相關的段落，再跟問題一起交給模型回答。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-07.html#concepts">第 07 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-reflection">
+        <dt>Reflection<small>AI Agent 設計模式</small></dt>
+        <dd>
+          <p>一個 LLM 寫初稿，另一個 LLM 評論給建議，再回去修改，可重複數次。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-08.html#concepts">第 08 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-reranking">
+        <dt>重排序<small>reranking</small></dt>
+        <dd>
+          <p>檢索找到多筆資料後，再用其他依據重新排列順序。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-07.html#concepts">第 07 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-skills">
+        <dt>Skills<small>技能</small></dt>
+        <dd>
+          <p>一個資料夾加一份 SKILL.md，教 AI 某件事的標準作業流程。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-09.html#concepts">第 09 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-system-prompt">
+        <dt>System Prompt<small>人設</small></dt>
+        <dd>
+          <p>寫在 system 角色裡的人設和規則，決定模型用什麼方式回答。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-06.html#concepts">第 06 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-tool-use">
+        <dt>Tool Use<small>工具呼叫</small></dt>
+        <dd>
+          <p>LLM 不擅長或不會的事，交給工具（函式）去做，再根據結果回答。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-08.html#concepts">第 08 週</a></dd>
+      </div>
+      <div class="glossary-item" id="term-vector-database">
+        <dt>向量資料庫<small>vector database</small></dt>
+        <dd>
+          <p>存放每段資料的向量，用來找出跟問題最接近的資料。</p>
+        </dd>
+        <dd class="from"><a href="notes/week-07.html#concepts">第 07 週</a></dd>
+      </div>
+    </dl>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>生成式AI 課後筆記 · 照 AGENTS.md 的規則製作</span>
+    <a href="about.html">這個站怎麼做的</a>
+  </div>
+</footer>
+</body>
+</html>

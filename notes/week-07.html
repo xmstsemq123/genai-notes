@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 07 週 讓 AI 看懂你的世界｜生成式AI 課後筆記</title>
+  <meta name="description" content="RAG 是先幫模型找好相關資料再一起放進 prompt，LLM Wiki 是先讓 AI 把資料整理成 wiki。">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script src="../assets/js/site.js"></script>
+</head>
+<body data-week="07" data-accent="sienna">
+<a class="skip-link" href="#main">跳到內容</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html">課後筆記<small>GENAI · 2026 秋</small></a>
+    <nav class="site-nav" aria-label="主選單">
+      <a href="../index.html">筆記目錄</a>
+      <a href="../glossary.html">名詞索引</a>
+      <a href="../about.html">這個站怎麼做的</a>
+      <button class="theme-toggle" type="button">深色</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <header class="note-head">
+      <p class="eyebrow">第 07 週</p>
+      <h1>讓 AI 看懂你的世界</h1>
+      <dl class="note-meta">
+        <div><dt>講義</dt><dd>07讓AI看懂你的世界</dd></div>
+        <div><dt>頁數</dt><dd>52 頁</dd></div>
+        <div><dt>作業</dt><dd>HW07 八戒說西遊</dd></div>
+      </dl>
+    </header>
+
+    <div class="note-layout">
+      <nav class="toc" aria-label="本頁目錄">
+        <p>本頁目錄</p>
+        <ol>
+          <li><a href="#summary">一句話重點</a></li>
+          <li><a href="#why">這週在解決什麼</a></li>
+          <li><a href="#concepts">核心概念</a></li>
+          <li><a href="#links">跟前幾週的關係</a></li>
+          <li><a href="#mine">我的理解</a></li>
+          <li><a href="#homework">這週的作業</a></li>
+          <li><a href="#questions">還沒搞懂的</a></li>
+          <li><a href="#terms">本週名詞</a></li>
+          <li><a href="#sources">出處</a></li>
+        </ol>
+      </nav>
+
+      <article class="note-body">
+        <section id="summary">
+          <h2><span class="no">01</span>一句話重點</h2>
+          <p class="oneliner">RAG 是先幫模型找好相關資料再一起放進 prompt，LLM Wiki 是先讓 AI 把資料整理成 wiki。</p>
+        </section>
+
+        <section id="why">
+          <h2><span class="no">02</span>這週在解決什麼</h2>
+          <p>上週講過，好的 prompt 要有「正確的資訊」和「清楚的指引」。指引可以自己寫，但資訊一多就不可能每次都手動貼進去。模型沒看過的資料，例如某份規定或某本說明書，它只能靠猜。</p>
+          <p>這週要讓電腦自己去找相關的資料，再交給模型回答。老師特別說要理解原理，不要被 RAG 這種大字彙嚇到，它其實就是 Context Engineering 的一種做法。</p>
+        </section>
+
+        <section id="concepts">
+          <h2><span class="no">03</span>核心概念</h2>
+          <dl class="concepts">
+            <div class="concept">
+              <dt>Embedding</dt>
+              <dd>
+                <p>用一個語言模型把一段文字變成一個向量，代表這段文字的意思。意思接近的兩段文字，向量也會靠得近。這種模型常用對比學習訓練，讓問題跟正確答案拉近，跟不相關的內容推遠。</p>
+                <p>例子：「圖書館星期日幾點關門？」要跟「本館週日開放至下午五點」靠近，跟「本館借書期限為三十天」離遠一點。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>文字塊與 metadata</dt>
+              <dd>
+                <p>傳統做法是把文件自動切成固定長度的文字塊，例如每塊 500 字、重疊 50 字。比較新的做法是自己把資料整理成一篇一篇，再分成兩部分。要做 embedding 的是內容，標題、來源、日期這些放 metadata，可以拿來做關鍵字搜尋或篩選。</p>
+                <p>例子：老師的勞動部範例，每篇有標題、資料類型、來源網址、【內容】和【檢索練習問題】，只有內容拿去做 embedding。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>RAG 的流程</dt>
+              <dd>
+                <p>每份資料先算好向量存起來。使用者問問題時，問題也算成向量，找出最接近的幾段，跟原本的問題一起寫進新的 prompt。找到的通常不只一筆，可能還要重排序，或把前後文一起帶進去。</p>
+                <p>例子：prompt 可以寫成「請根據 {retrieved_chunks} 裡的資訊，來回應使用者的問題：{question}」。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>短期記憶與長期記憶</dt>
+              <dd>
+                <p>短期記憶就是這次的對話紀錄，下次來就忘了，對話太長前面也會忘。長期記憶的一種做法是把過去的對話做成向量資料庫，用 RAG 找回來。另外也可以用 CAG，靠 KV-Cache 把資料整包先塞給模型。</p>
+                <p>例子：點餐機器人記得「87」常點的餐，還會提醒那個餐點已經沒賣了。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>LLM Wiki</dt>
+              <dd>
+                <p>Karpathy 的做法。原始資料放在 raw 資料夾，請 LLM 把它「編譯」成一份 Markdown 的 wiki，有摘要、概念文章和互相連結。之後問問題就讓 LLM 讀 wiki，回答也可以存回 wiki 繼續累積。</p>
+                <p>例子：他某個研究的 wiki 大約 100 篇文章、40 萬字，在這個規模下不需要複雜的 RAG，LLM 自己維護索引就夠了。</p>
+              </dd>
+            </div>
+          </dl>
+
+          <ol class="flow" aria-label="RAG 的流程">
+            <li>把資料整理成一篇一篇的文件</li>
+            <li>每篇內容算成向量，存進向量資料庫</li>
+            <li>使用者的問題也算成向量</li>
+            <li>找出最接近的幾篇，必要時重排序</li>
+            <li>資料跟問題一起放進 prompt 交給模型</li>
+          </ol>
+        </section>
+
+        <section id="links">
+          <h2><span class="no">04</span>跟前幾週的關係</h2>
+          <p><a href="week-06.html">第 06 週</a>做的對話機器人只能靠模型本來的知識回答，問到資料以外的事就會編。這週的 RAG 讓它照我們給的資料講。短期記憶那段也接著上週的 messages list，對話紀錄本身就是一種記憶。</p>
+        </section>
+
+        <section id="mine">
+          <h2><span class="no">05</span>我的理解</h2>
+          <div class="mine">
+            <p>RAG 聽起來很厲害，其實就是幫 AI 先把資料找好再塞進 prompt。embedding 那段我用訊號處理的角度想，就是把文字投影到一個高維空間，意思接近的文字距離也近。對比學習就是在拉近正樣本、推開負樣本。</p>
+          </div>
+          <div class="mine">
+            <p>老師的新做法是自己把資料整理成一篇一篇，再分 metadata 跟要做 embedding 的部分。我覺得這比亂切 500 字好控制很多。「記憶」也沒有很神秘，短期記憶是對話紀錄，長期記憶可以用 RAG 做。</p>
+          </div>
+          <div class="mine">
+            <p>LLM Wiki 跟 RAG 的差別是，RAG 每次問的時候才去找，LLM Wiki 是先讓 AI 把資料整理成 wiki，之後問問題讀 wiki 就好。</p>
+          </div>
+        </section>
+
+        <section id="homework">
+          <h2><span class="no">06</span>這週的作業</h2>
+          <div class="homework">
+            <span class="hw-label">HW07</span>
+            <div>
+              <h3>八戒說西遊</h3>
+              <p>讓豬八戒用自己的口吻講《西遊記》，只能根據我整理的 25 篇白話摘要回答。每篇一個 TXT，欄位有標題、回目、主要角色、地點、內容和檢索練習問題。我故意沒放烏雞國、比丘國，拿來測資料裡沒有的情況。</p>
+              <p>FAISS 先抓 10 篇，再用 metadata 的角色、地點做關鍵字加分重排序。53 題檢索練習問題，只用 FAISS 的 top-1 命中率是 84.9%，加上重排序變成 86.8%，top-3 都是 92.5%。沒有 RAG 的八戒說自己被封為持國天王，有 RAG 的答出淨壇使者。問烏雞國，沒有 RAG 的會自己編，有 RAG 的說記不得。</p>
+              <p>有資料還是會錯。陷阱題他有更正打白骨精的是猴哥，但把師父念緊箍咒說成是在罰他。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="questions">
+          <h2><span class="no">07</span>還沒搞懂的</h2>
+          <ol class="questions">
+            <li>相似度門檻要設多少才算「資料裡沒有」？我是用試的，有沒有比較好的方法？</li>
+            <li>CAG 把資料都塞進 KV-Cache，資料多到什麼程度就不划算了？</li>
+            <li>LLM Wiki 由 AI 自己維護，如果它整理錯了，之後所有問答都會跟著錯，要怎麼檢查？</li>
+          </ol>
+        </section>
+
+        <section id="terms">
+          <h2><span class="no">08</span>本週名詞</h2>
+          <ul class="term-list">
+            <li><a class="tag" href="../glossary.html#term-rag">RAG</a></li>
+            <li><a class="tag" href="../glossary.html#term-embedding">Embedding</a></li>
+            <li><a class="tag" href="../glossary.html#term-chunk">文字塊</a></li>
+            <li><a class="tag" href="../glossary.html#term-reranking">重排序</a></li>
+            <li><a class="tag" href="../glossary.html#term-vector-database">向量資料庫</a></li>
+            <li><a class="tag" href="../glossary.html#term-llm-wiki">LLM Wiki</a></li>
+          </ul>
+        </section>
+
+        <section id="sources">
+          <h2><span class="no">09</span>出處</h2>
+          <ul>
+            <li>07讓AI看懂你的世界 p.3 到 p.25：RAG、embedding、文字塊、metadata</li>
+            <li>07讓AI看懂你的世界 p.26 到 p.28：CAG 與 KV-Cache</li>
+            <li>07讓AI看懂你的世界 p.29 到 p.34：短期記憶與長期記憶</li>
+            <li>07讓AI看懂你的世界 p.35 到 p.48：LLM Wiki，Karpathy 原文翻譯</li>
+            <li>講義提到的 Karpathy Gist：<a href="https://bit.ly/llmwiki">bit.ly/llmwiki</a></li>
+          </ul>
+        </section>
+
+        <nav class="pager" aria-label="前後週">
+          <a class="prev" href="week-06.html"><small>上一週</small><span>打造自己的對話機器人</span></a>
+          <a class="next" href="week-08.html"><small>下一週</small><span>教 AI 做事的方法</span></a>
+        </nav>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>生成式AI 課後筆記 · 照 AGENTS.md 的規則製作</span>
+    <a href="../about.html">這個站怎麼做的</a>
+  </div>
+</footer>
+</body>
+</html>

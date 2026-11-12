@@ -1,0 +1,9 @@
+# 講義是老師的著作，只在本機給 AI 讀，不上傳
+sources/*/slides.pdf
+sources/*/slides.txt
+
+# 系統檔
+.DS_Store
+Thumbs.db
+__pycache__/
+node_modules/

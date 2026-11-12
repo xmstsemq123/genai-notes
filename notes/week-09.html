@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 09 週 換你當老闆｜生成式AI 課後筆記</title>
+  <meta name="description" content="從問 AI 到交辦給 AI，靠 harness 讓它動手，再用 AGENTS.md 講清楚成品、限制和驗收。">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script src="../assets/js/site.js"></script>
+</head>
+<body data-week="09" data-accent="plum">
+<a class="skip-link" href="#main">跳到內容</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html">課後筆記<small>GENAI · 2026 秋</small></a>
+    <nav class="site-nav" aria-label="主選單">
+      <a href="../index.html">筆記目錄</a>
+      <a href="../glossary.html">名詞索引</a>
+      <a href="../about.html">這個站怎麼做的</a>
+      <button class="theme-toggle" type="button">深色</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <header class="note-head">
+      <p class="eyebrow">第 09 週</p>
+      <h1>換你當老闆：Agentic Work 與 AI 工作現場</h1>
+      <dl class="note-meta">
+        <div><dt>講義</dt><dd>09換你當老闆</dd></div>
+        <div><dt>頁數</dt><dd>36 頁</dd></div>
+        <div><dt>作業</dt><dd>HW09 生成式AI 課後筆記站</dd></div>
+      </dl>
+    </header>
+
+    <div class="note-layout">
+      <nav class="toc" aria-label="本頁目錄">
+        <p>本頁目錄</p>
+        <ol>
+          <li><a href="#summary">一句話重點</a></li>
+          <li><a href="#why">這週在解決什麼</a></li>
+          <li><a href="#concepts">核心概念</a></li>
+          <li><a href="#links">跟前幾週的關係</a></li>
+          <li><a href="#mine">我的理解</a></li>
+          <li><a href="#homework">這週的作業</a></li>
+          <li><a href="#questions">還沒搞懂的</a></li>
+          <li><a href="#terms">本週名詞</a></li>
+          <li><a href="#sources">出處</a></li>
+        </ol>
+      </nav>
+
+      <article class="note-body">
+        <section id="summary">
+          <h2><span class="no">01</span>一句話重點</h2>
+          <p class="oneliner">從問 AI 到交辦給 AI，靠 harness 讓它動手，再用 AGENTS.md 講清楚成品、限制和驗收。</p>
+        </section>
+
+        <section id="why">
+          <h2><span class="no">02</span>這週在解決什麼</h2>
+          <p>上個單元用 AISuite 自己手刻 AI Agent，多少還是有點麻煩，完全沒有自己是老闆的感覺。平常用對話框也一樣。講義的例子是覺得桌面好亂，請 LLM 幫忙整理，它會請你把桌面上所有檔名連副檔名都貼給它。你打了 87 個檔名，它建議分成作業、照片、講義、安裝檔、其他 5 類。接下來還是要自己建 5 個資料夾，再把 87 個檔案一個一個拖進去。講義的標題是「AI 出一張嘴，事情都你在做」。</p>
+          <p>原因是 LLM 本身只會生成文字。它不會建資料夾、修改檔案，不會打開你的資料夾，也不能自己上網查最新資料。這週要處理的就是 AI 怎麼樣才會「動手」，以及要怎麼把一件工作交辦給它。</p>
+        </section>
+
+        <section id="concepts">
+          <h2><span class="no">03</span>核心概念</h2>
+          <dl class="concepts">
+            <div class="concept">
+              <dt>代理式 AI</dt>
+              <dd>
+                <p>代理式 AI（Agentic AI）是從「問 AI」變成「交辦給 AI」。對話式的用法是問問題，AI 像顧問，一問一答，最後拿到一段回答。代理式的用法是交辦一件工作，AI 像員工或同事，自己做完好幾個步驟，最後交回一份成品。</p>
+                <p>例子：同樣整理桌面，給 AI 可以處理檔案的工具之後，只要說「幫我整理桌面，先給我看計畫」。AI 自己打開資料夾看所有檔案、提出分類計畫，你說「可以，照做」，它就建資料夾、搬檔案、回報結果。講義上 AI 說「事情都我做」，你說「我是慣老闆」。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>Harness</dt>
+              <dd>
+                <p>課程的核心公式是 AI Agent = AI Model + Harness。AI Model 是大腦，負責想，也就是理解、規劃、判斷、生成。Harness 是工作裝備，負責做，把模型說的「我要開這個檔案」真的執行，再把結果回報給模型。講義的說法是模型大家都差不多，決定好不好用的是 Harness。</p>
+                <p>例子：上個單元用 AISuite 寫 Agent 時其實就做過 harness 了。那時用自己寫的 Python 函數當工具、把 system prompt 寫在程式裡、自己處理錯誤和重試。現在的產品直接提供讀寫檔、終端機、搜尋，規則改寫在 CLAUDE.md / AGENTS.md，錯誤和重試由產品處理。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>好老闆說清楚三件事</dt>
+              <dd>
+                <p>交辦工作時通常要講清楚三件事。要什麼成品，也就是做完會拿到什麼、放在哪、什麼格式。有什麼限制，也就是哪些可以動、哪些不能動。怎麼算做完，也就是要怎麼驗收。講義的重點是不要讓 AI 猜測。</p>
+                <p>例子：爛的交辦是「幫我整理桌面。」好的交辦是「幫我整理『桌面』這個資料夾。依用途分類，資料夾名稱用中文。不要刪除任何檔案，看不出用途的放進『待確認』。動手前先給我看分類計畫，做完列出每個檔案搬到哪裡。」</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>專案資料夾</dt>
+              <dd>
+                <p>做「專案型」AI Agent 時，通常會設一個專案資料夾，讓 AI 有存取權限。講義列出的工具有 ChatGPT、Claude、Gemini 等，也有開源並且可以用開源模型的選擇。</p>
+                <p>例子：「呆一布講義」的工作資料夾第一眼看起來很複雜，其實只有 <code>assets</code>、<code>ideas</code>、<code>slide_notes</code>、<code>presentation</code> 幾個資料夾，加上 <code>CLAUDE.md</code> 和 <code>index.html</code>。講義上標註的用途有「整理想法」「我們的小插圖」「最終的簡報」。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>AGENTS.md</dt>
+              <dd>
+                <p>給 AI 寫一本員工手冊，放在專案資料夾裡。Claude 專用的叫 CLAUDE.md，一般通用的叫 AGENTS.md。名字不一定非要這樣叫，也可以跟 AI 說先讀指定的「員工手冊」。這種規格書會由我們和 AI 討論出來。</p>
+                <p>例子：一直在同一個對話裡做專案也可以，只是對話會越來越長，換一台電腦也讀不到。有了員工手冊，每次開對話框就先說「請先讀 AGENTS.md，瞭解這個專案的內容。」不用擔心沒有寫完美，可以持續改寫。</p>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="formula" aria-label="AI Agent 的組成">
+            <span class="term">AI Agent<small>教 AI 用你的方法做事</small></span>
+            <span class="op">=</span>
+            <span class="term">AI Model<small>大腦，負責想</small></span>
+            <span class="op">+</span>
+            <span class="term">Harness<small>工作裝備，負責做</small></span>
+          </div>
+
+          <ol class="flow" aria-label="交辦給 AI 整理桌面的流程">
+            <li>你說「幫我整理桌面，先給我看計畫」</li>
+            <li>AI 自己打開資料夾、看所有檔案，提出分類計畫</li>
+            <li>你說「可以，照做」</li>
+            <li>AI 建資料夾、搬檔案，回報結果</li>
+          </ol>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th></th><th>對話式 Chat</th><th>代理式 Agentic</th></tr>
+              </thead>
+              <tbody>
+                <tr><th>你在做的事</th><td>問問題</td><td>交辦一件工作</td></tr>
+                <tr><th>AI 像是</th><td>顧問</td><td>員工、同事</td></tr>
+                <tr><th>過程</th><td>一問一答，你全程在場</td><td>多步驟自己做，你可以離開</td></tr>
+                <tr><th>能碰的東西</th><td>對話框裡的文字</td><td>檔案、瀏覽器、工具</td></tr>
+                <tr><th>你拿到的</th><td>一段回答</td><td>一份成品</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>一個完整的 harness 有什麼</h3>
+          <p>講義列了六樣。工作環境是有自己的電腦（沙盒），可以存檔、跑程式。工具是讀寫檔案、終端機、瀏覽器、網路搜尋。連接器（MCP）接上 Gmail、行事曆、雲端硬碟等你的 App。技能（Skills）是一個資料夾加一份 SKILL.md，教它某件事的「標準作業流程」。規則檔是 CLAUDE.md / AGENTS.md，每次上工前先讀。排程是時間到了，自己開工。</p>
+
+          <h3>其他專案範例與 Karpathy 的 LLM Wiki</h3>
+          <p>講義還舉了「呆一布粉專貼文工作室」每天出一篇貼文，以及圖像風格轉換專案。最後回到 Karpathy 的 LLM Wiki，簡單說是打造自己的 Wikipedia。你找的資料放在 raw，教 AI 怎麼把檔案產生或修改成 wiki 檔，並有一份 <code>index.md</code>。Farzapedia 是照這個做法做出來的個人化 wikipedia。</p>
+        </section>
+
+        <section id="links">
+          <h2><span class="no">04</span>跟前幾週的關係</h2>
+          <p><a href="week-08.html">第 08 週</a>已經有 AI Agent = AI Model + Harness 這個公式，也用 AISuite 自己寫 Tool Use 的函數，但工具、規則、錯誤處理都要自己寫。這週補上的是現成產品已經把 harness 做好，使用者只要在專案資料夾放一份 AGENTS.md，就能把整件工作交辦出去。<a href="week-06.html">第 06 週</a>寫在程式裡的 system prompt，這週換成放在檔案裡的 CLAUDE.md / AGENTS.md。講義最後提到的 LLM Wiki 在<a href="week-07.html">第 07 週</a>有比較完整的整理。</p>
+        </section>
+
+        <section id="mine">
+          <h2><span class="no">05</span>我的理解</h2>
+          <div class="mine">
+            <p>「AI 出一張嘴，事情都你在做」那頁很好笑但很真實。我之前用 ChatGPT 整理論文資料夾，真的是自己一個一個抄檔名貼給它。從「問 AI」到「交辦給 AI」，差別在 AI 能不能碰到檔案跟工具。對話式 AI 像顧問，Agentic AI 像員工。</p>
+          </div>
+          <div class="mine">
+            <p>上週用 AISuite 自己寫的 Python 函數就是 harness，現在 Claude Code、Codex 這些產品把 harness 做好了，CLAUDE.md / AGENTS.md 就是取代我們寫在程式裡的 system prompt。AGENTS.md 像員工手冊，換電腦、開新對話都讀得到，不用一直在同一個對話裡講。而且不用一次寫完美，可以一直改。</p>
+          </div>
+          <div class="mine">
+            <p>好老闆要講清楚三件事：要什麼成品、有什麼限制、怎麼算做完，重點是不要讓 AI 猜。整理桌面那個好的交辦例子裡有中文資料夾名、不能刪檔、看不出用途的放「待確認」、動手前先給計畫、做完列出每個檔案搬到哪。我覺得「看不出來的放待確認」這條最聰明，等於告訴 AI 不確定的時候要怎麼做。</p>
+          </div>
+        </section>
+
+        <section id="homework">
+          <h2><span class="no">06</span>這週的作業</h2>
+          <div class="homework">
+            <span class="hw-label">HW09</span>
+            <div>
+              <h3>生成式AI 課後筆記站</h3>
+              <p>HW09 就是這個筆記站。我把「每週做一頁筆記」寫成 AGENTS.md，之後只要把講義跟 my-notes.md 放進 <code>sources/</code>，跟 AI 說做第幾週就好。</p>
+              <p>規則是跟 AI 討論出來的，討論紀錄放在 <code>docs/ai-discussion.md</code>。第 06、07 週是我自己做的，當標準範例。第 08 週和這一頁是開全新的對話，只說「請先讀 AGENTS.md，瞭解這個專案的內容。然後幫我做第 NN 週的筆記」做出來的。兩次都照流程做完，check.mjs 也通過，講義看不清楚的頁碼都有列在回報裡。</p>
+              <p>測試抓到 7 個規則沒寫清楚的地方。例如 AGENTS.md 跟範本對補充元素的說法不一樣，講義改名成 slides.pdf 之後它不知道原始檔名，規則叫它用的 <code>.more</code> 這個 class 根本不存在。全部記在 AGENTS.md 最後的規則修改紀錄。自己讀覺得很清楚的規則，換一個沒看過這個專案的 AI 來做，才知道哪裡會卡。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="questions">
+          <h2><span class="no">07</span>還沒搞懂的</h2>
+          <ol class="questions">
+            <li>CLAUDE.md 跟 AGENTS.md 如果同時存在，而且內容不一樣，AI 會聽哪一個？</li>
+            <li>規則寫越多越好嗎？會不會太長 AI 反而抓不到重點？</li>
+            <li>Skills 跟 AGENTS.md 的差別，是不是一個講「這個專案的規矩」，一個講「某件事的標準作業流程」？</li>
+          </ol>
+        </section>
+
+        <section id="terms">
+          <h2><span class="no">08</span>本週名詞</h2>
+          <ul class="term-list">
+            <li><a class="tag" href="../glossary.html#term-agentic-ai">代理式 AI</a></li>
+            <li><a class="tag" href="../glossary.html#term-harness">Harness</a></li>
+            <li><a class="tag" href="../glossary.html#term-agents-md">AGENTS.md</a></li>
+            <li><a class="tag" href="../glossary.html#term-claude-md">CLAUDE.md</a></li>
+            <li><a class="tag" href="../glossary.html#term-skills">Skills</a></li>
+            <li><a class="tag" href="../glossary.html#term-ai-agent">AI Agent</a></li>
+            <li><a class="tag" href="../glossary.html#term-tool-use">Tool Use</a></li>
+            <li><a class="tag" href="../glossary.html#term-system-prompt">System Prompt</a></li>
+            <li><a class="tag" href="../glossary.html#term-llm-wiki">LLM Wiki</a></li>
+          </ul>
+        </section>
+
+        <section id="sources">
+          <h2><span class="no">09</span>出處</h2>
+          <ul>
+            <li>09換你當老闆 p.3 到 p.11：AI Agent 的定義、整理桌面的例子、對話式與代理式</li>
+            <li>09換你當老闆 p.13 到 p.17：LLM 只會生成文字、Harness、完整的 harness</li>
+            <li>09換你當老闆 p.18 到 p.19：好老闆說清楚三件事、好的和壞的交辦</li>
+            <li>09換你當老闆 p.20 到 p.24：專案型工具、專案資料夾、員工手冊</li>
+            <li>09換你當老闆 p.26 到 p.31：呆一布講義、粉專貼文、圖像風格轉換等專案範例</li>
+            <li>09換你當老闆 p.33 到 p.35：Karpathy 的 LLM Wiki、Farzapedia</li>
+            <li>講義上的呆一布講義成果：<a href="https://diveai-lab.github.io/diveai-lessons/">diveai-lab.github.io/diveai-lessons</a></li>
+            <li>講義提到的 Karpathy Gist：<a href="https://bit.ly/llmwiki">bit.ly/llmwiki</a>，Farzapedia：<a href="https://bit.ly/farzawiki">bit.ly/farzawiki</a></li>
+          </ul>
+        </section>
+
+        <nav class="pager" aria-label="前後週">
+          <a class="prev" href="week-08.html"><small>上一週</small><span>教 AI 做事的方法</span></a>
+        </nav>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>生成式AI 課後筆記 · 照 AGENTS.md 的規則製作</span>
+    <a href="../about.html">這個站怎麼做的</a>
+  </div>
+</footer>
+</body>
+</html>

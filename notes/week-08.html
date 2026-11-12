@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 08 週 教 AI 做事的方法｜生成式AI 課後筆記</title>
+  <meta name="description" content="AI Agent 是教 AI 用我們做事的方法做事，吳恩達整理出四個設計模式。">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script src="../assets/js/site.js"></script>
+</head>
+<body data-week="08" data-accent="olive">
+<a class="skip-link" href="#main">跳到內容</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html">課後筆記<small>GENAI · 2026 秋</small></a>
+    <nav class="site-nav" aria-label="主選單">
+      <a href="../index.html">筆記目錄</a>
+      <a href="../glossary.html">名詞索引</a>
+      <a href="../about.html">這個站怎麼做的</a>
+      <button class="theme-toggle" type="button">深色</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <header class="note-head">
+      <p class="eyebrow">第 08 週</p>
+      <h1>教 AI 做事的方法：AI Agent 與 Agentic Design Patterns</h1>
+      <dl class="note-meta">
+        <div><dt>講義</dt><dd>08教AI做事的方法</dd></div>
+        <div><dt>頁數</dt><dd>56 頁</dd></div>
+        <div><dt>作業</dt><dd>HW08 Reflection 寫信給教授小幫手</dd></div>
+      </dl>
+    </header>
+
+    <div class="note-layout">
+      <nav class="toc" aria-label="本頁目錄">
+        <p>本頁目錄</p>
+        <ol>
+          <li><a href="#summary">一句話重點</a></li>
+          <li><a href="#why">這週在解決什麼</a></li>
+          <li><a href="#concepts">核心概念</a></li>
+          <li><a href="#links">跟前幾週的關係</a></li>
+          <li><a href="#mine">我的理解</a></li>
+          <li><a href="#homework">這週的作業</a></li>
+          <li><a href="#questions">還沒搞懂的</a></li>
+          <li><a href="#terms">本週名詞</a></li>
+          <li><a href="#sources">出處</a></li>
+        </ol>
+      </nav>
+
+      <article class="note-body">
+        <section id="summary">
+          <h2><span class="no">01</span>一句話重點</h2>
+          <p class="oneliner">AI Agent 是教 AI 用我們做事的方法做事，吳恩達整理出四個設計模式。</p>
+        </section>
+
+        <section id="why">
+          <h2><span class="no">02</span>這週在解決什麼</h2>
+          <p>以前用 LLM 的方式是下一個 prompt，它直接給一個輸出。老師的比喻是要一個人寫一篇文章，但不能用刪除鍵、不能修改，一路寫下去。人很難做到這樣，寫程式也一樣，大家習慣一邊寫、一邊試、一邊改。</p>
+          <p>要把一件事做好，人通常還得做不少事。可能要查一下規定、上網搜尋、按一下計算機，也可能要跟 LLM 來回溝通好幾次，告訴它哪裡跟實際情況不一樣、哪裡可以改。AI Agent 就是把這些規劃、收集資料、反覆嘗試的工作交給 AI 自己做完。</p>
+        </section>
+
+        <section id="concepts">
+          <h2><span class="no">03</span>核心概念</h2>
+          <dl class="concepts">
+            <div class="concept">
+              <dt>AI Agent</dt>
+              <dd>
+                <p>課本 Russell &amp; Norvig 的定義是能透過感測器感知環境、透過致動器對環境採取行動的實體。老師的定義比較直接，在 LLM 時代，AI Agent 就是教 AI 用「我們做事的方法」做事情。RAG 由電腦自動去找相關資訊，所以也算一種 AI Agent。</p>
+                <p>例子：老闆（使用者）講一句話，員工（AI Agents）就動起來。一個 prompt 進去，系統會自己做規劃、用 RAG 查不同的資料、呼叫工具、讀取記憶，最後交給 LLM 產生輸出。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>Reflection</dt>
+              <dd>
+                <p>第一個 LLM 產生初稿，第二個 LLM 進行評估並提供改善建議，然後第一個 LLM 照建議修改。這個來回可以重複好幾次。</p>
+                <p>例子：講義把兩個角色叫做「作者」和「評論員」。作者寫初稿，評論員給評論，作者再改。評論員也可以換成跟作者不同的模型。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>Tool Use</dt>
+              <dd>
+                <p>LLM 不擅長或不會的事，就不要再逼它，改成呼叫工具（函式）來做。講義舉的三類是精確計算、實際數據和網路搜尋。要先告訴 AI 有哪些工具可以用，LLM 會參與兩個階段，一次決定要呼叫哪個工具，一次根據工具傳回的資料回答。</p>
+                <p>例子：飲料店 ChatBot 有 <code>quote_order</code>（輸入品項和杯數，回傳單價、總金額、庫存夠不夠）和 <code>get_menu</code>（回傳菜單）兩個工具。客人說「我想訂 20 杯麥茶」，LLM 決定呼叫 <code>quote_order("麥茶", 20)</code>，拿到單價 30、總額 600 的 JSON 後，回答「沒問題！20 杯麥茶一共 600 元。」</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>Planning</dt>
+              <dd>
+                <p>先請 LLM「想一想」「打草稿」，規劃好要怎麼進行，再正式回應，比較能完整回覆使用者的需求。CoT（Chain-of-Thought）是有名的做法，可以有系統地拆解複雜議題、找出議題間的關聯、更完整地涵蓋各個面向，也比較容易看出優先順序。</p>
+                <p>例子：DeepSeek-R1 會先產生一段「思考」，用 <code>&lt;think&gt;</code> 和 <code>&lt;/think&gt;</code> 包起來再回答。它的目標是任何問題都能產生好的思維，如果只做單一類型的任務，有可能自己打造出更好的「思考」。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>Multiagent Collaboration</dt>
+              <dd>
+                <p>多代理合作，就是多個 AI Agent 一起工作。常常會有一個像 PM 角色的 LLM 負責拆解任務、分配工作。</p>
+                <p>例子：PM 拆解完任務後說「1 號幫我算這個，2 號去查 XXOO 資訊，3 號依資訊分析理由」，4 號則是「這次沒我事」。</p>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="formula" aria-label="AI Agent 的組成">
+            <span class="term">AI Agent<small>教 AI 用我們的方法做事</small></span>
+            <span class="op">=</span>
+            <span class="term">AI Model<small>模型本身</small></span>
+            <span class="op">+</span>
+            <span class="term">Harness<small>模型以外的部分</small></span>
+          </div>
+
+          <ol class="flow" aria-label="飲料店 ChatBot 的 Tool Use 流程">
+            <li>先告訴 LLM 有 quote_order 和 get_menu 兩個工具</li>
+            <li>客人說「我想訂 20 杯麥茶」，LLM 決定呼叫 quote_order("麥茶", 20)</li>
+            <li>程式執行函式，傳回 JSON 格式的資料</li>
+            <li>把 JSON 和原本的問題一起放進 prompt，請 LLM 根據資料回答</li>
+          </ol>
+
+          <h3>工具的 JSON 與 MCP、A2A</h3>
+          <p>電腦很喜歡 JSON，它是用文字描述「有欄位名稱的資料表單」。飲料店的工具傳回的就是這樣一筆資料：</p>
+<pre><code>{
+  "ok": true,
+  "item_name": "麥茶",
+  "quantity": 20,
+  "unit_price": 30,
+  "total": 600,
+  "stock": 30,
+  "currency": "TWD",
+  "ordered": false
+}</code></pre>
+          <p>工具不一定要自己寫，很多平台可以直接連結上網搜尋、email，甚至處理桌面上的檔案，也可以把工具分享給別人用。Anthropic 的 MCP（Model Context Protocol）關注單一 Agent 怎麼使用外部工具，把 LLM 跟外部工具、資料來源或環境的互動方式標準化。Google 的 A2A（Agent-to-Agent）著重 Agent 之間的溝通，定義代理之間怎麼交換資訊、協作和協調。</p>
+
+          <h3>進階學習：Vibe Coding</h3>
+          <p>Vibe Coding 是 Karpathy 在 2025 年 2 月的 X 貼文創的詞。原文的做法是忘了程式碼的存在，一律「Accept All」、不看 diff，遇到錯誤訊息就直接貼回去給 AI 改。所以 Vibe Coding 不等於 AI 輔助寫程式。它適合週末好玩的小專案、自己用而且出錯也沒關係的小工具，或是先做出原型跟程式設計師討論。要正式上線的程式、不檢查可能會出亂子的程式就不適合。</p>
+        </section>
+
+        <section id="links">
+          <h2><span class="no">04</span>跟前幾週的關係</h2>
+          <p><a href="week-06.html">第 06 週</a>說好的 prompt 要有「正確的資訊」和「清楚的指引」，<a href="week-07.html">第 07 週</a>的 RAG 讓電腦自動去找正確的資訊。這週把 RAG 放回更大的框架，它其實就是一種 AI Agent。上週的機器人只會查資料、回答一次，這週補上的是查完資料以外的事，例如用 Tool Use 讓程式去算錢，用 Reflection 讓它寫完再檢查、再修改。</p>
+        </section>
+
+        <section id="mine">
+          <h2><span class="no">05</span>我的理解</h2>
+          <div class="mine">
+            <p>老師對 AI Agent 的定義是「教 AI 用我們做事的方法做事」，公式是 AI Agent = AI Model + Harness，比課本 Russell &amp; Norvig 的定義好懂很多。以前用 LLM 就像要人寫文章不能按刪除鍵，一路寫到底。Agent 就是讓它可以寫、檢查、改。</p>
+          </div>
+          <div class="mine">
+            <p>四個設計模式是 Reflection、Tool Use、Planning、Multiagent Collaboration。RAG 也算一種 Agent 這點有點醒我，原來上週就碰過了。Tool Use 飲料店那個例子很清楚，LLM 其實參與兩次，第一次決定要呼叫 <code>quote_order("麥茶", 20)</code>，第二次拿 JSON 結果寫回答。錢是程式算的，LLM 沒有自己算。</p>
+          </div>
+          <div class="mine">
+            <p>Vibe Coding 不等於 AI 輔助寫程式。Karpathy 原文是完全不看 diff、有錯就貼回去。它適合週末小專案，不適合要上線的東西。</p>
+          </div>
+        </section>
+
+        <section id="homework">
+          <h2><span class="no">06</span>這週的作業</h2>
+          <div class="homework">
+            <span class="hw-label">HW08</span>
+            <div>
+              <h3>Reflection 寫信給教授小幫手</h3>
+              <p>作者負責寫信，審查員扮演嚴格的教授，用 5 個項目打分數，每項 0 到 2 分，沒到 9 分就退回去改，最多改 3 次。</p>
+              <p>一開始接上 Groq，審查員在 4 個情境的第 1 版全部給 10 分，迴圈一次都沒跑，等於沒有 Reflection。後來我把評分標準改成具體的扣分條件，例如稱謂沒有教授的姓最多 1 分，並讓審查員先列問題再打分。改完之後第 1 版變成 6 到 8 分，每個情境至少改一次才及格。</p>
+              <p>學到的是審查員才是重點。審查員太寬鬆，迴圈就跑不起來。審查員自己編資料，作者也會照抄，它舉例寫了一個「林志明」，作者就直接抄進署名。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="questions">
+          <h2><span class="no">07</span>還沒搞懂的</h2>
+          <ol class="questions">
+            <li>Reflection 的作者跟審查員如果用同一個模型，審查員會不會比較容易放水？</li>
+            <li>MCP 跟 A2A 的差別我懂字面意思，但實際上什麼情況要用 A2A？</li>
+            <li>Planning 跟 CoT 的差別在哪？CoT 算 Planning 的一種，還是 Planning 包含更多？</li>
+          </ol>
+        </section>
+
+        <section id="terms">
+          <h2><span class="no">08</span>本週名詞</h2>
+          <ul class="term-list">
+            <li><a class="tag" href="../glossary.html#term-ai-agent">AI Agent</a></li>
+            <li><a class="tag" href="../glossary.html#term-reflection">Reflection</a></li>
+            <li><a class="tag" href="../glossary.html#term-tool-use">Tool Use</a></li>
+            <li><a class="tag" href="../glossary.html#term-planning">Planning</a></li>
+            <li><a class="tag" href="../glossary.html#term-multiagent-collaboration">Multiagent Collaboration</a></li>
+            <li><a class="tag" href="../glossary.html#term-mcp">MCP</a></li>
+            <li><a class="tag" href="../glossary.html#term-rag">RAG</a></li>
+          </ul>
+        </section>
+
+        <section id="sources">
+          <h2><span class="no">09</span>出處</h2>
+          <ul>
+            <li>08教AI做事的方法 p.3 到 p.16：AI Agent 的定義、RAG 也是一種 AI Agent</li>
+            <li>08教AI做事的方法 p.18 到 p.21：四個設計模式、Reflection</li>
+            <li>08教AI做事的方法 p.22 到 p.31：Tool Use、飲料店例子、JSON、MCP 與 A2A</li>
+            <li>08教AI做事的方法 p.32 到 p.36：Planning、CoT、DeepSeek-R1</li>
+            <li>08教AI做事的方法 p.37 到 p.38：Multiagent Collaboration</li>
+            <li>08教AI做事的方法 p.43 到 p.51：Vibe Coding</li>
+            <li>講義提到的吳恩達演講：<a href="https://youtu.be/sal78ACtGTc">youtu.be/sal78ACtGTc</a></li>
+            <li>講義提到的範例：<a href="https://yenlung.me/AI07a">Reflection</a>、<a href="https://yenlung.me/AI07b">Tool Use</a>、<a href="https://yenlung.me/AI07c">Planning</a></li>
+          </ul>
+        </section>
+
+        <nav class="pager" aria-label="前後週">
+          <a class="prev" href="week-07.html"><small>上一週</small><span>讓 AI 看懂你的世界</span></a>
+          <a class="next" href="week-09.html"><small>下一週</small><span>換你當老闆</span></a>
+        </nav>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>生成式AI 課後筆記 · 照 AGENTS.md 的規則製作</span>
+    <a href="../about.html">這個站怎麼做的</a>
+  </div>
+</footer>
+</body>
+</html>

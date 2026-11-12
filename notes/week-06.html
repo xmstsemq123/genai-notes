@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第 06 週 打造自己的對話機器人｜生成式AI 課後筆記</title>
+  <meta name="description" content="模型可以跑在自己電腦上，用時要自己讀過、自己負責，再用 system prompt 做出有人設的機器人。">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script src="../assets/js/site.js"></script>
+</head>
+<body data-week="06" data-accent="teal">
+<a class="skip-link" href="#main">跳到內容</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html">課後筆記<small>GENAI · 2026 秋</small></a>
+    <nav class="site-nav" aria-label="主選單">
+      <a href="../index.html">筆記目錄</a>
+      <a href="../glossary.html">名詞索引</a>
+      <a href="../about.html">這個站怎麼做的</a>
+      <button class="theme-toggle" type="button">深色</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <header class="note-head">
+      <p class="eyebrow">第 06 週</p>
+      <h1>打造自己的對話機器人</h1>
+      <dl class="note-meta">
+        <div><dt>講義</dt><dd>06打造自己的對話機器人</dd></div>
+        <div><dt>頁數</dt><dd>80 頁</dd></div>
+        <div><dt>作業</dt><dd>HW06 口試前五分鐘</dd></div>
+      </dl>
+    </header>
+
+    <div class="note-layout">
+      <nav class="toc" aria-label="本頁目錄">
+        <p>本頁目錄</p>
+        <ol>
+          <li><a href="#summary">一句話重點</a></li>
+          <li><a href="#why">這週在解決什麼</a></li>
+          <li><a href="#concepts">核心概念</a></li>
+          <li><a href="#links">跟前幾週的關係</a></li>
+          <li><a href="#mine">我的理解</a></li>
+          <li><a href="#homework">這週的作業</a></li>
+          <li><a href="#questions">還沒搞懂的</a></li>
+          <li><a href="#terms">本週名詞</a></li>
+          <li><a href="#sources">出處</a></li>
+        </ol>
+      </nav>
+
+      <article class="note-body">
+        <section id="summary">
+          <h2><span class="no">01</span>一句話重點</h2>
+          <p class="oneliner">模型可以跑在自己電腦上，用時要自己讀過、自己負責，再用 system prompt 做出有人設的機器人。</p>
+        </section>
+
+        <section id="why">
+          <h2><span class="no">02</span>這週在解決什麼</h2>
+          <p>平常用 ChatGPT 都是打開網頁一問一答。它說話的方式不是我們決定的，對話也存在別人的伺服器上。有些東西其實不該丟上去，例如還沒公開的考題或個資。</p>
+          <p>這週分成三段來處理這件事。先看怎麼把開源模型放到自己的機器上跑，再談用 AI 的時候哪些責任在使用者身上，最後用 system prompt 加上 AISuite，自己寫一個有固定個性的對話機器人。</p>
+        </section>
+
+        <section id="concepts">
+          <h2><span class="no">03</span>核心概念</h2>
+          <dl class="concepts">
+            <div class="concept">
+              <dt>量化與 VRAM</dt>
+              <dd>
+                <p>要在自己電腦跑模型，先看顯示卡的 VRAM 夠不夠。模型通常會量化成 4-bit，這時每 10 億個參數大約佔 0.5 GB，再加 1 到 2 GB 的額外空間。</p>
+                <p>例子：gpt-oss 20B 有 200 億個參數，要 0.5 × 20 = 10 GB 以上。RTX 4090 有 24 GB，跑得動。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>記憶體頻寬與 MoE</dt>
+              <dd>
+                <p>容量夠只代表跑得起來，生成快不快還要看記憶體頻寬。Mac 用 unified memory，記憶體多大差不多就是 VRAM 多大。同樣大小的模型，MoE 架構會跑得比較快。</p>
+                <p>例子：Mac Studio 最高 512 GB，AMD Ryzen AI Max+ 395 跟 NVIDIA DGX Spark 都是 128 GB 共用記憶體。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>幻覺</dt>
+              <dd>
+                <p>Karpathy 的說法是，LLM 本來就是作夢的機器，生成內容這件事本身就是幻覺。大家真正不想要的，是一個「助理」在該講事實的時候亂講。</p>
+                <p>例子：搜尋引擎是 0% 的夢境，但它不會創造。LLM 會創造，所以一定會有編出來的東西。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>負責任的使用者</dt>
+              <dd>
+                <p>生成的內容有沒有侵權、引用的文獻對不對、品質合不合用，都是使用者的責任。就算對話不拿去訓練，存在雲端的原始對話也可能因為帳號被盜或系統漏洞外洩。</p>
+                <p>例子：重要考試的題目、機密文件不要拿去問線上的模型。完全在本機跑才能避開把對話交給雲端這一層風險。</p>
+              </dd>
+            </div>
+            <div class="concept">
+              <dt>System Prompt</dt>
+              <dd>
+                <p>對話裡有三個角色。system 是模型的人設，user 是使用者的輸入，assistant 是模型的回應。只要在 system 寫好人設，同一個模型就會換一種說話方式。</p>
+                <p>例子：員瑛式思考機器人只在 system 寫了幾句「什麼都正向思考，以『完全是 Lucky Vicky 呀!』結尾」，送錯餐也能變成超幸運的事。</p>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="formula" aria-label="4-bit 量化時需要的 VRAM 估算">
+            <span class="term">VRAM<small>需要的顯示記憶體</small></span>
+            <span class="op">≈</span>
+            <span class="term">0.5 × 參數量<small>單位 B，4-bit 量化</small></span>
+            <span class="op">+</span>
+            <span class="term">1 到 2 GB<small>額外空間</small></span>
+          </div>
+
+          <h3>用 AISuite 呼叫模型</h3>
+          <p>AISuite 是吳恩達老師的套件，換供應商只要改 <code>model</code> 那一行。對話紀錄照三個角色排成一個 list 傳進去，回覆在 <code>response.choices[0].message.content</code>。</p>
+<pre><code>client = ai.Client()
+messages = [
+    {"role": "system", "content": "人設"},
+    {"role": "user", "content": "使用者輸入"},
+]
+response = client.chat.completions.create(model="openai:gpt-4o", messages=messages)
+reply = response.choices[0].message.content</code></pre>
+        </section>
+
+        <section id="links">
+          <h2><span class="no">04</span>跟前幾週的關係</h2>
+          <p>這是筆記站的第一篇，前五週的課沒有整理成筆記。這週做出來的機器人只會用模型本來的知識回答，也只記得這一次對話。下一週的 <a href="week-07.html">RAG</a> 就是在補這個缺口，讓它根據我們給的資料回答。</p>
+        </section>
+
+        <section id="mine">
+          <h2><span class="no">05</span>我的理解</h2>
+          <div class="mine">
+            <p>以前以為能不能跑本地模型只看參數量，原來要算 VRAM。實驗室的 4090 有 24 GB，照老師的算法跑 20B 的模型應該沒問題。不過老師也說頻寬會影響生成速度，所以不是容量夠就好。</p>
+          </div>
+          <div class="mine">
+            <p>Karpathy 說幻覺是 LLM 最大的特點，我的理解是 LLM 本來就在「生」東西。我們不想要的其實是當助理用的時候亂講，所以要不要相信它，還是要看用在哪裡。</p>
+          </div>
+          <div class="mine">
+            <p>老師最後那句「一定要讀它寫了什麼」我覺得是這週最重要的一句。沒寫錯不代表寫對了我的意思。system prompt 也一樣，員瑛式思考那個例子只在 system 多寫幾句，效果就差很多，但寫完還是要自己讀過才知道它有沒有照做。</p>
+          </div>
+        </section>
+
+        <section id="homework">
+          <h2><span class="no">06</span>這週的作業</h2>
+          <div class="homework">
+            <span class="hw-label">HW06</span>
+            <div>
+              <h3>口試前五分鐘</h3>
+              <p>做一個研究生口試陪練機器人，保留老師 AISuite 加 Gradio 的架構。第一次只問一題，我回答後它固定用「有說清楚的地方」和「還缺的依據」各回一句，再問下一題。它不能幫我編數據或文獻，也不能假裝自己是真的教授。</p>
+              <p>介面有「陪練」「提示」「整理」三個按鈕。按提示或整理的時候不能偷偷換題，所以我用 Python 記住目前的題目。人設是跟 AI 討論三輪才定下來的，第一版 AI 說每次只問一題，結果它自己的示範一次問了兩題，這是我讀過才發現的。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="questions">
+          <h2><span class="no">07</span>還沒搞懂的</h2>
+          <ol class="questions">
+            <li>MoE 為什麼同樣大小會跑比較快？是因為每次只用到一部分參數嗎？</li>
+            <li>本地跑的模型如果被做過「去審查版」，那原本的安全對齊到底是存在哪裡？</li>
+            <li>H-CoT 攻擊讓有思考的模型更容易被繞過，那推理模型的安全要怎麼做？</li>
+          </ol>
+        </section>
+
+        <section id="terms">
+          <h2><span class="no">08</span>本週名詞</h2>
+          <ul class="term-list">
+            <li><a class="tag" href="../glossary.html#term-quantization">量化</a></li>
+            <li><a class="tag" href="../glossary.html#term-moe">MoE</a></li>
+            <li><a class="tag" href="../glossary.html#term-hallucination">幻覺</a></li>
+            <li><a class="tag" href="../glossary.html#term-system-prompt">System Prompt</a></li>
+            <li><a class="tag" href="../glossary.html#term-aisuite">AISuite</a></li>
+          </ul>
+        </section>
+
+        <section id="sources">
+          <h2><span class="no">09</span>出處</h2>
+          <ul>
+            <li>06打造自己的對話機器人 p.3 到 p.13：本地模型、VRAM、Groq</li>
+            <li>06打造自己的對話機器人 p.15 到 p.33：幻覺、負責任使用 AI</li>
+            <li>06打造自己的對話機器人 p.35 到 p.48：prompt、system 人設、員瑛式思考</li>
+            <li>06打造自己的對話機器人 p.72 到 p.79：AISuite</li>
+            <li>講義提到的模型評測網站：<a href="https://arena.ai/">Arena AI</a>、<a href="https://artificialanalysis.ai/">Artificial Analysis</a></li>
+          </ul>
+        </section>
+
+        <nav class="pager" aria-label="前後週">
+          <a class="next" href="week-07.html"><small>下一週</small><span>讓 AI 看懂你的世界</span></a>
+        </nav>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>生成式AI 課後筆記 · 照 AGENTS.md 的規則製作</span>
+    <a href="../about.html">這個站怎麼做的</a>
+  </div>
+</footer>
+</body>
+</html>
