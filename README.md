@@ -2,7 +2,7 @@
 
 每上完一週「生成式AI」，我把講義和自己的想法整理成一頁筆記。這是第 09 週「換你當老闆」的作業：寫一份 AGENTS.md，讓 AI 讀完就能照同一套規則繼續做新的一週。
 
-- 網站：https://OWNER.github.io/genai-notes/
+- 網站：https://xmstsemq123.github.io/genai-notes/
 - 規則：[AGENTS.md](AGENTS.md)
 - 跟 AI 討論規則的紀錄：[docs/ai-discussion.md](docs/ai-discussion.md)
 
